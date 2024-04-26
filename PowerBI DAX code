@@ -1,0 +1,12 @@
+Measure = 
+VAR lastWeekAmount =
+    CALCULATE (
+        SUM ( Sheet1[sales] ),
+        FILTER (
+            ALL ( 'Sheet1' ),
+            'Sheet1'[WeekNumber]
+                = MIN ( 'Sheet1'[WeekNumber] ) - 1
+        )
+    )
+RETURN
+    DIVIDE ( SUM ( Sheet1[Sales] ) - lastWeekAmount, lastWeekAmount, 0 )
